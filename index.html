@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>로봇이 아님 확인</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- 검색엔진 차단(선택) -->
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <meta name="googlebot" content="noindex,nofollow,noarchive" />
+
+  <!-- hCaptcha -->
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; text-align: center; padding: 40px; }
+    #go[disabled] { opacity: .5; cursor: not-allowed; }
+    .msg { margin: 8px 0 16px; color: #c00; display: none; }
+  </style>
+</head>
+<body>
+  <h1>접속 확인</h1>
+  <p>계속하려면 아래에서 인증해 주세요.</p>
+
+  <div
+    class="h-captcha"
+    data-sitekey="c1cef9f6-e2c4-4f0e-9b16-4fa2b7d0c0ce"
+    data-callback="onCaptchaSuccess"
+    data-expired-callback="onCaptchaExpired"
+    data-error-callback="onCaptchaError">
+  </div>
+
+  <div id="err" class="msg">인증 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.</div>
+
+  <p><button id="go" onclick="proceed()" disabled>인증 후 계속</button></p>
+
+  <script>
+    let token = null;
+
+    function onCaptchaSuccess(t) {
+      token = t;
+      document.getElementById('go').disabled = false;
+      document.getElementById('err').style.display = 'none';
+    }
+    function onCaptchaExpired() {
+      token = null;
+      document.getElementById('go').disabled = true;
+    }
+    function onCaptchaError() {
+      token = null;
+      document.getElementById('go').disabled = true;
+      document.getElementById('err').style.display = 'block';
+    }
+
+    function proceed() {
+      if (!token) return;
+      const btn = document.getElementById('go');
+      btn.disabled = true;
+      btn.textContent = '확인됨… 이동 준비중 (2초)';
+      setTimeout(function(){
+        // 최종 이동 URL로 바꾸세요
+        location.href = 'https://buly.kr/DPUMwVe';
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
